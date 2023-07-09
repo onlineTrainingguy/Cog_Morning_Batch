@@ -1,0 +1,162 @@
+    1  mkdir MyTraining
+    2  cd MyTraining/
+    3  touch dao.java pl.java bal.java
+    4  ls
+    5  git init
+    6  ls .git
+    7  git config --global user.name globaluser
+    8  git config --global user.email globaluser@gmail.com
+    9  git status
+   10  git add bal.java
+   11  git status
+   12  git rm --cached bal.java
+   13  git status
+   14  git add .
+   15  git status
+   16  git commit -m "bal.java file is added" bal.java
+   17  git status
+   18  git commit -m "pl.java dao.java files are added"
+   19  git status
+   20  git log
+   21  git branch
+   22  git log --oneline
+   23  git remote add origin https://github.com/onlineTrainingguy/MyTraining.git
+   24  git remote --help
+   25  git remote -v
+   26  git branch
+   27  git branch -M main
+   28  git branch
+   29  git push -u origin main
+   30  ssh-keygen
+   31  cat /root/.ssh/id_rsa.pub
+   32  git remote set-url origin git@github.com:onlineTrainingguy/MyTraining.git
+   33  git remote -v
+   34  touch new.java
+   35  git status
+   36  git add .
+   37  git commit -m "new.java file is added"
+   38  git push origin main
+   39  ls
+   40  git fetch
+   41  ls
+   42  git merge origin/main
+   43  ls
+   44  git log --oneline
+   45  git pull origin main
+   46  touch 1.exe 2.exe 3.jar 4.war 5.log 6.log
+   47  git status
+   48  vi .gitignore
+   49  git status
+   50  vi .gitignore
+   51  git status
+   52  ls
+   53  rm *.exe *.jar *.war *.log
+   54  ls
+   55  git log --oneline
+   56  touch appsetting.json
+   57  git status
+   58  git add .
+   59  git commit -m "appsettings.json file is added"
+   60  git log --oneline
+   61  echo "{{ name: testing }}" > appsetting.json
+   62  git status
+   63  git add .
+   64  git commit -m "appsettings.json file is modified"
+   65  git status
+   66  git log --oneline
+   67  git diff f4ce03b 797e82b
+   68  git revert 797e82b
+   69  cat appsetting.json
+   70  git log --oneline
+   71  git revert 0d00de5
+   72  git log --oneline
+   73  cat appsetting.json
+   74  touch tmp.java
+   75  git status
+   76  git add .
+   77  git commit -m "tmp.java file is added"
+   78  git log --oneline
+   79  git reset HEAD~1
+   80  git log --oneline
+   81  git status
+   82  git add .
+   83  git commit -m "tmp.java file is added"
+   84  git log --oneline
+   85  git reset --soft HEAD~1
+   86  git log --oneline
+   87  git status
+   88  git commit -m "tmp.java file is added"
+   89  git log --oneline
+   90  git reset --hard HEAD~1
+   91  git log --oneline
+   92  git status
+   93  ls
+   94  git branch
+   95  git branch dev1
+   96  git branch
+   97  git branch -D dev1
+   98  git branch
+   99  git branch dev1
+  100  git branch dev2
+  101  git branch
+  102  git checkout dev1
+  103  git branch
+  104  git checkout main
+  105  git branch
+  106  git push origin dev1
+  107  git push origin dev2
+  108  git branch
+  109  git push origin main
+  110  git checkout dev1
+  111  ls
+  112  git pull origin dev1
+  113  ls
+  114  git checkout main
+  115  git merge dev1
+  116  ls
+  117  git checkout dev2
+  118  git pull dev2
+  119  git pull origin dev2
+  120  ls
+  121  git checkout main
+  122  git merge dev2
+  123  ls
+  124  git branch
+  125  ls
+  126  git checkout dev1
+  127  echo "This file is modified by dev1" > bal.java
+  128  git add .
+  129  git commit -m "dev1 has made the changes in bal.java file"
+  130  cat bal.java
+  131  git checkout dev2
+  132  cat bal.java
+  133  echo "This file is modified by dev2" > bal.java
+  134  git add .
+  135  git commit -m "changes are done be dev2 in bal.java file"
+  136  git checkout main
+  137  cat bal.java
+  138  git merge dev1.java
+  139  git merge dev1
+  140  cat bal.java
+  141  git merge dev2
+  142  cat bal.java
+  143  git status
+  144  vi bal.java
+  145  git mergetool --tool vimdiff
+  146  git status
+  147  cat bal.java
+  148  rm bal.java.orig
+  149  git commit -m "Merge Conflict is resolved"
+  150  git checkout dev1
+  151  cat bal.java
+  152  git merge main
+  153  cat bal.java
+  154  git chekout dev2
+  155  git checkout dev2
+  156  git merge main
+  157  git push origin dev2
+  158  git checkout dev1
+  159  git push origin dev1
+  160  git checkout main
+  161  git push origin main
+  162  history
