@@ -1,0 +1,168 @@
+ 1  mkdir mr
+    2  cd mr
+    3  git init
+    4  git status
+    5  touch m1 m2 m3
+    6  git status
+    7  git add .
+    8  git status
+    9  git commit -m "m1" m1
+   10  git commit -m "m2" m2
+   11  git commit -m "m3" m3
+   12  git log --oneline
+   13  git branch feature
+   14  git checkout feature
+   15  git log --oneline
+   16  touch f1
+   17  git add .
+   18  git commit -m "f1"
+   19  git log --oneline
+   20  git checkout -
+   21  touch m4
+   22  git add .
+   23  git commit -m "m4"
+   24  git log --oneline
+   25  checkout -
+   26  git checkout -
+   27  ls
+   28  git merge master
+   29  ls
+   30  git log --oneline
+   31  cd ..
+   32  mkdir rm
+   33  cd rm/
+   34  git init
+   35  touch m1 m2 m3
+   36  git add .
+   37  git commit -m "m1" m1
+   38  git commit -m "m2" m2
+   39  git commit -m "m3" m3
+   40  git branch feature
+   41  git checkout feature
+   42  touch f1
+   43  git add .
+   44  git commit -m "f1"
+   45  git log --oneline
+   46  git checkout -
+   47  touch m4
+   48  git add .
+   49  git commit -m "m4"
+   50  git log --oneline
+   51  git checkout -
+   52  git rebase master
+   53  ls
+   54  git log --oneline
+   55  cd ..
+   56  rm -ifr rm mr
+   57  mkdir cherrypick
+   58  cd cherrypick/
+   59  touch m1 m2
+   60  git init
+   61  git add .
+   62  git commit -m "m1 m2"
+   63  git branch dev
+   64  git checkout dev
+   65  touch dev1 dev11 dev111
+   66  git add .
+   67  git commit -m "dev1" dev1
+   68  git commit -m "dev11" dev11
+   69  git commit -m "dev111" dev111
+   70  git log --oneline
+   71  git checkout -
+   72  git cherry-pick 76a9ff4
+   73  ls
+   74  git log --oneline
+   75  git cherry-pick 57b8e41 -n
+   76  ls
+   77  git status
+   78  git commit -m "dev11"
+   79  cd ..
+   80  rm -ifr cherrypick/
+   81  mkdir stash
+   82  cd stash/
+   83  git init
+   84  touch m1 m2
+   85  git add .
+   86  git commit -m "m1 m2"
+   87  git branch dev1
+   88  git checkout dev1
+   89  ls
+   90  touch dev1
+   91  git add .
+   92  git checkout -
+   93  ls
+   94  git checkout -
+   95  git stash save "dev1 is stashed"
+   96  ls
+   97  git stash list
+   98  git stash pop
+   99  git stash save "dev1"
+  100  git stash list
+  101  git stash drop stash@{0}
+  102  ls
+  103  cd ..
+  104  rm -ifr stash/
+  105  mkdir tags
+  106  cd tags/
+  107  git init
+  108  touch m1 m2 m3
+  109  git add .
+  110  git commit -m "v1"
+  111  git tag v1
+  112  ls
+  113  touch v2 v2.1
+  114  git add .
+  115  git commit -m "v2"
+  116  git tag v2
+  117  touch v3 v3.1
+  118  git add .
+  119  git commit -m "v3"
+  120  git tag v3
+  121  git status
+  122  git tag
+  123  git checkout v1
+  124  ls
+  125  git checkout v2
+  126  ls
+  127  git checkout v3
+  128  ls
+  129  git push --tags
+  130  cd ..
+  131  rm -ifr tags/
+  132  mkdir worktree
+  133  cd worktree/
+  134  git init
+  135  touch m1
+  136  git add .
+  137  git commit -m "m1"
+  138  git branch fix
+  139  git branch feature
+  140  git branch release
+  141  git branch
+  142  ls
+  143  git worktree add hotfix fix
+  144  ls
+  145  git branch
+  146  git worktree add feature feature
+  147  git worktree add release release
+  148  ls
+  149  cd feature/
+  150  git branch
+  151  cd ../release/
+  152  git branch
+  153  cd ..
+  154  cd ..
+  155  rm -ifr worktree/
+  156  mkdir squash
+  157  cd squash/
+  158  git init
+  159  touch 1 2 3 4
+  160  git add .
+  161  git commit -m "1" 1
+  162  git commit -m "2" 2
+  163  git commit -m "3" 3
+  164  git commit -m "4" 4
+  165  git log --oneline
+  166  git rebase -i HEAD~3
+  167  git log --oneline
+  168  cd ..
