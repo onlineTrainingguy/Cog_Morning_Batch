@@ -1,0 +1,44 @@
+  1  apt update
+    2  apt install docker.io -y
+    3  docker --version
+    4  systemctl status docker
+    5  docker --help
+    6  docker images
+    7  docker image ls
+    8  docker pull ubuntu
+    9  docker images
+   10  docker pull ubuntu:20.04
+   11  docker images
+   12  docker container run -it --name c1 -d ubuntu
+   13  docker ps -a
+   14  docker exec -it c1 bash
+   15  docker container run -it --name c2 -d centos
+   16  docker container ls
+   17  docker ps
+   18  docker container run -it --name c3 -d ubuntu
+   19  docker ps
+   20  docker ps -a
+   21  docker pull nginx
+   22  docker images
+   23  docker container run -it --name web -d nginx
+   24  docker stats web
+   25  docker container run -it --name web1 -m 16m -d nginx
+   26  docker inspect web1
+   27  docker inspect web1 | grep Memory
+   28  docker inspect web1 | grep -w Memory
+   29  docker stats web1
+   30  docker container update web1 -m 32m
+   31  docker inspect web1 | grep -w Memory
+   32  docker logs web1
+   33  docker container run -it --name web2 -c 100 -d nginx
+   34  docker inspect web2 | grep CpuShare
+   35  docker inspect web2 | grep CpuShares
+   36  docker ps
+   37  docker stop web
+   38  docker ps -a
+   39  docker start web
+   40  docker ps -a
+   41  docker restart web
+   42  docker ps -a
+   43  docker kill web
+   44  docker ps -a
