@@ -42,3 +42,80 @@
    42  docker ps -a
    43  docker kill web
    44  docker ps -a
+ 46  docker ps
+   47  docker ps -a
+   48  docker rm c1
+   49  docker rm -f c1
+   50  docker ps -a
+   51  docker rm web
+   52  docker ps -a -q
+   53  docker rm -f $(docker ps -a -q)
+   54  docker ps -a
+   55  docker images
+   56  docker rmi ubuntu:20.04
+   57  docker images
+   58  docker images -q
+   59  docker rmi -f $(docker images -q)
+   60  docker images
+   61  docker container run -it --name web -p 80:80 -d ubuntu
+   62  docker ps -a
+   63  docker exec -it web bash
+
+Inside the container
+ 1  apt update
+    2  apt install apache2 -y
+    3  service apache2 status
+    4  service apache2 start
+    5  service apache2 status
+    6  ls /var/www/html
+    7  cd /var/www/html
+    8  echo "<h1>File inside the container </h1>" > myfile.html
+    9  ls
+   10  exit
+
+   64  history
+   65  echo "<h1> This is deployment code </h1>" > test.html
+   66  ls
+   67  docker ps
+   68  docker cp test.html web:/var/www/html
+   69  docker commit web webimg
+   70  docker images
+   71  docker rm -f web
+   72  docker images
+   73  docker ps -a
+   74  docker container run -it --name web -p 84:80 -d webimg
+   75  docker exec -it web bash
+   76  docker images
+   77  docker save webimg img.tar
+   78  docker save webimg >img.tar
+   79  ls
+   80  docker rm -f web
+   81  docker rmi webimg
+   82  docker images
+   83  docker load < img.tar
+   84  docker images
+   85  docker login
+   86  docker logout
+   87  docker login
+   88  docker images
+   89  docker push webimg
+   90  docker image tag webimg ramansharma95/webimg
+   91  docker images
+   92  docker push ramansharma95/webimg
+   93  docker rm -f web
+   94  docker ps -a
+   95  docker images
+   96  docker rmi webimg
+   97  docker rmi ramansharma95/webimg
+   98  docker pull registry
+   99  docker container run -it --name local_registry -p 5000:5000 -d registry
+  100  docker images
+  101  docker image tag ubuntu localhost:5000/myubuntu
+  102  docker images
+  103  docker push localhost:5000/myubuntu
+  104  docker rmi localhost:5000/myubuntu
+  105  docker rmi ubuntu
+  106  docker images
+  107  docker pull localhost:5000/myubuntu
+  108  docker images
+
