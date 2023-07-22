@@ -1,0 +1,141 @@
+   1  echo docker01 > /etc/hostname
+    2  apt update && apt install docker.io -y
+    3  mkdir /etc/docker/certs.d
+    4  openssl req -newkey rsa:4096 -nodes -sha256 -keyout /certs/domain.key -addext "subjectAltName = DNS:repo.docker.kmit" -x509 -days 365 -out /certs/domain.crt
+    5  cd /certs
+    6  ls
+    7  cp domain.crt /etc/docker/certs.d/repo.docker.kmit\:5000/ca.crt
+    8  ip a
+    9  vi /etc/hosts
+   10  docker run -d -p 5000:5000 -v /my_repo:/var/lib/registry -v /certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key --restart on-failure --name myregistry registry
+   11  docker ps
+   12  cd /home/ubuntu/
+   13  docker pull nginx
+   14  docker image tag nginx repo.docker.kmit:5000/mynginx
+   15  docker push repo.docker.kmit:5000/mynginx
+   16  cat /certs/domain.crt
+   17  vi Dockerfile
+   18  docker build . -t webimg
+   19  echo "<h1>This is test file </h1>" > test.html
+   20  docker build . -t webimg
+   21  docker images
+   22  docker rmi nginx
+   23  docker rmi registry repo.docker.kmit:5000/mynginx
+   24  docker ps
+   25  docker rm -f myregistry
+   26  docker rmi registry
+   27  docker images
+   28  docker container run -it --name web -p 80:80 -d webimg
+   29  docker rm -f web
+   30  docker rmi webimg
+   31  docker container run -it --name c1 -d ubuntu
+   32  docker exec -it c1 bash
+   33  docker stop c1
+   34  docker start c1
+   35  docker exec -it c1 bash
+   36  docker rm -f c1
+   37  docker container run -it --name c1 --mount type=tmpfs -d ubuntu
+   38  docker container run -it --name c1 --mount type=tmpfs,destination=/demo -d ubuntu
+   39  docker ps -a
+   40  docker exec -it c1 bash
+   41  docker stop c1
+   42  docker start c1
+   43  docker exec -it c1 bash
+   44  docker stop c1
+   45  docker start c1
+   46  docker exec -it c1 bash
+   47  docker rm -f c1
+   48  ls /var/lib/docker/
+   49  ls /var/lib/docker/volumes/
+   50  docker volume --help
+   51  docker volume create demo-vol
+   52  ls /var/lib/docker/volumes/
+   53  ls /var/lib/docker/volumes/demo-vol/_data/
+   54  docker container run -it --name c1 --mount source=demo-vol,destination=/demo -d ubuntu
+   55  docker exec -it c1 bash
+   56  ls /var/lib/docker/volumes/demo-vol/_data/
+   57  docker rm -f c1
+   58  ls /var/lib/docker/volumes/demo-vol/_data/
+   59  docker ps -a
+   60  docker container run -it --name c1 --mount source=demo-vol,destination=/app -d centos
+   61  docker exec -it c1 bash
+   62  mkdir mydir
+   63  docker container run -it --name c2 -v /home/ubuntu/mydir:/demo -d ubuntu
+   64  docker exec -it c2 bash
+   65  ls mydir/
+   66  docker rm -f c2
+   67  ls mydir/
+   68  docker container run -it --name c2 -v /home/ubuntu/mydir:/demo1 -d ubuntu
+   69  docker exec -it c2 bash
+   70  docker rm -f $(docker ps -a -q)
+   71  ip a
+   72  docker container run -it --name c1 -d centos
+   73  docker inspect c1
+   74  docker container run -it --name c2 -d centos
+   75  docker inspect c2
+   76  docker exec -it c1 bash
+   77  docker network --help
+   78  docker network ls
+   79  docker rm -f c1 c2
+   80  docker network create -d bridge wenetwork --subnet 192.168.0.0/16 --gateway 192.168.0.1
+   81  docker network ls
+   82  docker network inspect webnetwork
+   83  docker network inspect wenetwork
+   84  docker container run -it --name c1 --network wenetwork -d centos
+   85  docker inspect c1
+   86  docker container run -it --name c2 --network wenetwork -d centos
+   87  docker inspect c2
+   88  docker exec -it c1 bash
+   89  docker network rm wenetwork
+   90  docker network ls
+   91  docker rm -f c1 c2
+   92  docker network rm wenetwork
+   93  docker network ls
+   94  docker container run -it --name web -d nginx
+   95  docker rm -f web
+   96  docker container run -it --name web --network host -d nginx
+   97  docker rm -f web
+   98  docker network ls
+   99  docker container run -it --name n1 --network none -d centos
+  100  docker inspect n1
+  101  docker exec -it n1 bash
+  102  docker network disconnect none n1
+  103  docker network connect bridge n1
+  104  docker inspect n1
+  105  docker ps -a
+  106  docker rm -f n1
+  107  DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+  108  mkdir -p $DOCKER_CONFIG/cli-plugins
+  109  curl -SL https://github.com/docker/compose/releases/download/v2.19.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+  110  chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+  111  docker compose version
+  112  vi docker-compose.yaml
+  113  docker compose --help
+  114  docker compose up -d
+  115  docker ps -a
+  116  docker inspect 1c2b5d4aa685
+  117  docker network ls
+  118  docker volume ls
+  119  docker compose --help
+  120  docker compose stop db
+  121  docker ps -a
+  122  docker compose start db
+  123  docker compose --help
+  124  docker compose db ps
+  125  docker compose  ps
+  126  docker compose images
+  127  docker compose exec -it ubuntu-db-1 bash
+  128  docker compose exec db -it ubuntu-db-1 bash
+  129  docker compose exec db ubuntu-db-1 bash
+  130  docker compose exec db ubuntu-db-1
+  131  docker compose exec --help
+  132  docker compose exec -T db
+  133  docker compose exec -T db ubuntu-db-1
+  134  docker compose exec -T ubuntu-db-1
+  135  docker compose exec db ls
+  136  docker compose down -v
+  137  docker ps -a
+  138  docker network ls
+  139  docker volume ls
+  140  docker volume rm demo-vol
+  141  history
