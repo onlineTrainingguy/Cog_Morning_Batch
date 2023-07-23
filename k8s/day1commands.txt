@@ -1,0 +1,44 @@
+ 1  echo kmaster > /etc/hostname
+    2  apt update && apt install docker.io -y
+    3  ls .
+    4  /var/run/docker.sock
+    5  ls /var/run/docker.sock
+    6  sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+    7  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    8  cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+
+EOF
+
+    9  sudo apt-get update
+   10  apt install -qq -y kubeadm=1.27.2-00 kubelet=1.27.2-00 kubectl=1.27.2-00
+   11  sudo apt-mark hold kubelet kubeadm kubectl
+   12  kubeadm init --apiserver-advertise-address=172.31.52.35 --pod-network-cidr=192.168.0.0/16
+   13  mkdir -p $HOME/.kube
+   14  kubectl get nodes
+   15  kubectl create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
+   16  kubectl get nodes
+   17  kubectl run pod1 --image nginx
+   18  kubectl get pods
+   19  kubectl get pods -o wide
+   20  curl 192.168.59.193
+   21  kubectl get pod pod1 -o yaml
+   22  kubectl get pod pod1 -o json
+   23  kubectl edit pod pod1
+   24  kubectl get pod pod1 -o json
+   25  curl 192.168.59.193
+   26  kubectl edit pod pod1
+   27  kubectl get pods -o wide
+   28  curl 192.168.59.193
+   29  curl 192.168.59.193:8080
+   30  kubectl describe pod pod1
+   31  kubectl edit pod pod1
+   32  kubectl delete pod pod1
+   33  kubectl get pods
+   34  kubectl run pod1 --image nginx
+   35  kubectl run pod2 --image nginx
+   36  kubectl run pod3 --image nginx
+   37  kubectl get pods
+   38  kubectl delete pod --all
+   39  history
