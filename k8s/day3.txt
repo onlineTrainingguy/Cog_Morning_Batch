@@ -1,0 +1,109 @@
+  1  kubectl get nodes
+    2  kubectl get all
+    3  vi deploy.yaml
+    4  kubectl create -f deploy.yaml
+    5  kubectl get pods -o wide
+    6  kubectl expose deploy nginx-deployment --name internal-service --type ClusterIP --targe-port 80 --port 80
+    7  kubectl expose deploy nginx-deployment --name internal-service --type ClusterIP --target-port 80 --port 80
+    8  kubectl get svc
+    9  kubectl describe svc internal-service
+   10  kubectl get pods -o wide
+   11  kubectl delete pod nginx-deployment-6c888bb4c6-jn26n
+   12  kubectl get pods -o wide
+   13  kubectl describe svc internal-service
+   14  curl localhost
+   15  kubectl get pods -o wide
+   16  curl 192.168.59.219
+   17  kubectl get svc
+   18  curl 10.104.76.238
+   19  kubectl expose deploy nginx-deployment --name internal-service --type ClusterIP --target-port 80 --port 80 --dry-run=client -o yaml
+   20  kubectl edit svc internal-service
+   21  kubectl delete svc internal-service
+   22  vi ci.yaml
+   23  kubectl create -f ci.yaml
+   24  kubectl get svc
+   25  curl 10.110.213.110
+   26  kubectl delete svc internal-service
+   27  kubectl expose deploy nginx-deployment --name external-service --type NodePort --target-port 80 --port 80
+   28  kubectl get svc
+   29  kubectl delete svc external-service
+   30  cp ci.yaml np.yaml
+   31  vi np.yaml
+   32  kubectl create -f np.yaml
+   33  kubectl get svc
+   34  kubectl delete svc external-service
+   35  kubectl expose deploy nginx-deployment --name external-service --type LoadBalancer --target-port 80 --port 80
+   36  kubectl get svc
+   37  kubectl delete svc external-service
+   38  kubectl expose deploy nginx-deployment --name external-service --type LoadBalancer --target-port 80 --port 80 --external-ip 20.10.36
+   39  kubectl expose deploy nginx-deployment --name external-service --type LoadBalancer --target-port 80 --port 80 --external-ip 20.10.36.56
+   40  kubectl get svc
+   41  kubectl delete svc external-service
+   42  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.7.1/deploy/static/provider/baremetal/deploy.yaml
+   43  ls
+   44  rm *.yaml
+   45  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.7.1/deploy/static/provider/baremetal/deploy.yaml
+   46  ls
+   47  kubectl get ns
+   48  kubectl get svc -n ingress-nginx
+   49  kubectl get svc
+   50  kubectl delete deploy --all
+   51  kubectl get svc
+   52  kubectl get pods
+   53  kubectl run nginx --image nginx
+   54  kubectl run tomcat --image tomcat
+   55  kubectl expose pod nginx --type ClusterIP --port 80
+   56  kubectl get svc
+   57  kubectl expose pod tomcat --type ClusterIP --port 8080
+   58  kubectl get svc
+   59  vi ingress.yaml
+   60  kubectl create -f ingress.yaml
+   61  kubectl get ingress
+   62  kubectl delete -f ingress.yaml
+   63  kubectl delete pods --all
+   64  kubectl delete svc nginx tomcat
+   65  kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.7.1/deploy/static/provider/baremetal/deploy.yaml
+   66  ls
+   67  rm ingress.yaml
+   68  vi ed.yaml
+   69  kubectl create -f ed.yaml
+   70  kubectl get pods
+   71  kubectl describe pod nginx-emptydir
+   72  kubectl exec -it  nginx-emptydir -- bash
+   73  kubectl delete pod --all
+   74  vi hp.yaml
+   75  kubectl create -f hp.yaml
+   76  kubectl get pods -o wide
+   77  kubectl describe pod nginx-hostpath
+   78  kubectl exec -it nginx-hostpath -- bash
+   79  kubectl delete pod --all
+   80  vi pv.yaml
+   81  kubectl create -f pv.yaml
+   82  kubectl get pv
+   83  vi pvc.yaml
+   84  kubectl create -f pvc.yaml
+   85  kubectl get pv
+   86  kubectl get pvc
+   87  vi pod.yaml
+   88  kubectl create -f pod.yaml
+   89  kubectl get pods
+   90  kubectl get pods -o wide
+   91  kubectl describe pod busybox
+   92  kubectl exec -it busybox -- /bin/sh
+   93  kubectl delete pod busybox
+   94  kubectl delete pvc --all
+   95  kubectl delete pv --all
+   96  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+   97  kubectl get ns
+   98  kubectl get svc -n kubernetes-dashboard
+   99  kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
+  100  kubectl get svc -n kubernetes-dashboard
+  101  kubectl create serviceaccount cluster-admin-dashboard-sa
+  102  kubectl create clusterrolebinding cluster-admin-dashboard-sa --clusterrole=cluster-admin --serviceaccount=default:cluster-admin-dashboard-sa
+  103  vi secret.yaml
+  104  kubectl create -f secret.yaml
+  105  kubectl create token cluster-admin-dashboard-sa
+  106  kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+  107  kubectl delete clusterrolebinding cluster-admin-dashboard-sa
+  108  kubectl delete serviceaccount cluster-admin-dashboard-sa
+  109  history
