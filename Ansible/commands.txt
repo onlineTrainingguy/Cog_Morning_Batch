@@ -1,0 +1,92 @@
+   1  ssh-keygen
+    2  cat /root/.ssh/id_rsa.pub
+    3  ssh 172.31.62.116
+    4* cat /root/.ssh/id_rsa.pu
+    5  ssh 172.31.58.160
+    6  ssh 172.31.57.54
+    7  ssh 172.31.63.77
+    8  sudo apt-add-repository ppa:ansible/ansible
+    9  apt update
+   10  apt install ansible -y
+   11  ansible --version
+   12  cd /etc/ansible/
+   13  ls
+   14  cat ansible.cfg
+   15  ansible-config init --disabled > ansible.cfg
+   16  cat ansible.cfg
+   17  vi ansible.cfg
+   18  vi hosts
+   19  cat hosts
+   20  ansible-doc -l
+   21  ansible-doc -s apt
+   22  ls
+   23  ansible-doc -s ping
+   24  ansible webservers,dbservers -m ping
+   25  ansible dbservers -m yum -a "name=tree state=present"
+   26  ansible webservers -m shell -a "apt update && apt install apache2 -y"
+   27  ansible webservers -m shell -a "apt purge apache2 -y"
+   28  ansible webservers -m apt -a "name=apache2 state=present"
+   29  ansible webservers -m apt -a "name=apache2 state=absent purge=true"
+   30  ansible webservers -m apt -a "name=apache2 state=present"
+   31  ansible webservers -m service -a "name=apache2 state=stopped"
+   32  ansible webservers -m service -a "name=apache2 state=started"
+   33  touch /tmp/master.txt
+   34  ansible webservers -m copy -a "src=/tmp/master.txt dest=/tmp/master.txt"
+   35  ansible webservers -m copy -a "content='Hello World' dest=/tmp/master.txt"
+   36  vi 1.yaml
+   37  ansible-playbook 1.yaml
+   38  vi 1.yaml
+   39  ansible-playbook 1.yaml
+   40  vi 1.yaml
+   41  ansible-playbook 1.yaml
+   42  vi 2.yaml
+   43  ansible-playbook 2.yaml
+   44  vi 3.yaml
+   45  ansible-playbook 3.yaml
+   46  vi 3.yaml
+   47  ansible-playbook 3.yaml
+   48  vi 3.yaml
+   49  ansible-playbook 3.yaml
+   50  vi 3.yaml
+   51  ansible-playbook 3.yaml
+   52  vi 4.yaml
+   53  ansible-playbook 4.yaml --check
+   54  touch /tmp/testing.txt
+   55  ansible-playbook 4.yaml --check
+   56  ansible-playbook 4.yaml
+   57  vi ansible.cfg
+   58  ls /var/log/
+   59  ansible-playbook 4.yaml
+   60  ls /var/log/
+   61  cat /var/log/ansible.log
+   62  vi ansible.cfg
+   63  vi 5.yaml
+   64  ansible-playbook 5.yaml
+   65  vi 5.yaml
+   66  ansible-playbook 5.yaml
+   67  vi 6.yaml
+   68  ansible-playbook 6.yaml
+   69  vi 7.yaml
+   70  ansible-playbook 6.yaml
+   71  ansible-playbook 7.yaml
+   72  vi 7.yaml
+   73  ansible-playbook 7.yaml
+   74  vi 8.yaml
+   75  ansible-playbook 8.yaml
+   76  vi 8.yaml
+   77  ansible-playbook 8.yaml
+   78  vi 9.yaml
+   79  ansible-playbook 9.yaml --tags stopservice
+   80  ansible-playbook 9.yaml --tags startservice
+   81  ansible-vault create t.yaml
+   82  cat t.yaml
+   83  ansible-playbook t.yaml
+   84  ansible-playbook -- help
+   85  ansible-playbook --help
+   86  ansible-playbook t.yaml --ask-vault-pass
+   87  ansible-playbook t.yaml
+   88  ansible-vault decrypt t.yaml
+   89  cat t.yaml
+   90  ansible-vault encrypt t.yaml
+   91  cat t.yaml
+   92  history
