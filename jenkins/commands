@@ -1,0 +1,20 @@
+Ansible Job
+
+cd /var/lib/jenkins/workspace/MavenProject
+sudo ansible-playbook mvn.yaml
+
+Docker Job
+
+cd /var/lib/jenkins/workspace/MavenProject
+sudo bash /home/ubuntu/docker.sh
+sudo docker build . -t ramansharma95/newimg:$BUILD_NUMBER
+sudo docker push ramansharma95/newimg:$BUILD_NUMBER
+sudo docker container run -it --name mycontainer -d ramansharma95/newimg:$BUILD_NUMBER
+
+docker.sh
+count=`sudo docker ps -a | wc -l`
+if [ $count -ne 1 ]
+then
+        sudo docker rm -f $(sudo docker ps -a -q)
+        sudo docker rmi -f $(sudo docker images -q)
+fi
